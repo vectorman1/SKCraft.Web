@@ -20,3 +20,5 @@ deploy:
   app:
     master: skcraft
   skip_cleanup: true
+  secure:
+    api_key: $HEROKU_API_KEY

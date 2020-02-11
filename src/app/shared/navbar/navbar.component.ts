@@ -9,6 +9,7 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
+    navbarTransparent: number;
 
     constructor(public location: Location, private element : ElementRef) {
         this.sidebarVisible = false;
@@ -47,15 +48,17 @@ export class NavbarComponent implements OnInit {
             this.sidebarClose();
         }
     };
-    isHome() {
+    public isHome() {
       var titlee = this.location.prepareExternalUrl(this.location.path());
       if(titlee.charAt(0) === '#'){
           titlee = titlee.slice( 1 );
       }
         if( titlee === '/home' ) {
+            this.navbarTransparent = 1;
             return true;
         }
         else {
+            this.navbarTransparent = 0;
             return false;
         }
     }

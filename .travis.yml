@@ -13,3 +13,10 @@ before_script:
 
 script:
   - ng build --prod --base-href https://skcraft.herokuapp.com/
+
+deploy:
+  provider: heroku
+  edge: true
+  app:
+    master: skcraft
+  skip_cleanup: true

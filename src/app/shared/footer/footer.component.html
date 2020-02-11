@@ -3,10 +3,11 @@
         <div class="row">
             <nav class="footer-nav">
                 <ul>
-                    <li><a href="https://www.creative-tim.com">Apply Now</a></li>
-                    <li><a href="http://blog.creative-tim.com">Discord</a></li>
-                    <li><a [routerLink]="['/terms']">Terms of Service</a></li>
-                    <li><a [routerLink]="[ '/privacy']">Privacy Policy</a></li>
+                    <li><a class="btn btn-link" [routerLink]="['/signup']">Log In</a></li>
+                    <li><a class="btn btn-link" [routerLink]="['/signup']" routerLinkActive="btn-danger">Sign Up</a></li>
+                    <li><a class="btn btn-link" [routerLink]="['/user/:session/']" routerLinkActive="btn-danger">Userdata</a></li>
+                    <li><a class="btn btn-link" [routerLink]="['/terms']" routerLinkActive="btn-danger">Terms of Service</a></li>
+                    <li><a class="btn btn-link" [routerLink]="[ '/privacy']" routerLinkActive="btn-danger">Privacy Policy</a></li>
                 </ul>
             </nav>
             <div class="credits ml-auto">

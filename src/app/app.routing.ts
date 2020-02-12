@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { ApplyComponent } from './apply/apply.component';
 import { TermsComponent } from './terms/terms.component';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { RulesComponent } from './rules/rules.component';
 
 const routes: Routes =[
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes =[
     { path: 'apply', component: ApplyComponent },
     { path: 'terms', component: TermsComponent},
     { path: 'privacy', component: PrivacyComponent},
+    { path: 'rules', component: RulesComponent },
     { path: 'demo',             component: ComponentsComponent },
     { path: 'user-profile',     component: ProfileComponent },
     { path: 'signup',           component: SignupComponent },

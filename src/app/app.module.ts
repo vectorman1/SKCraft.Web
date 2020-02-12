@@ -27,7 +27,7 @@ import { TermsComponent } from './terms/terms.component';
     ApplyComponent,
     RulesComponent,
     PrivacyComponent,
-    TermsComponent
+    TermsComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,19 +2,19 @@ import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-    providedIn: 'root'
+	providedIn: 'root'
 })
 export class RoutingService {
-    constructor(private location: Location) {
-    }
+	constructor(private location: Location) {
+	}
 
-    public getPath() {
-        let path = this.location.prepareExternalUrl(this.location.path());
+	public getPath() {
+		let path = this.location.prepareExternalUrl(this.location.path());
 
-        if (path.charAt(0) === '#') {
-            path = path.slice(1);
-        }
+		if (path.charAt(0) === '#') {
+			path = path.slice(1);
+		}
 
-        return path;
-    }
+		return path;
+	}
 }

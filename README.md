@@ -1,5 +1,6 @@
-# SKCraftWeb [![Build Status](https://travis-ci.org/vectorman1/SKCraft.Web.svg?branch=master)](https://travis-ci.org/vectorman1/SKCraft.Web)
-
+# SKCraftWeb 
+Master CI:[![Build Status](https://travis-ci.org/vectorman1/SKCraft.Web.svg?branch=master)](https://travis-ci.org/vectorman1/SKCraft.Web)
+Dev CI:[![Build Status](https://travis-ci.com/vectorman1/SKCraft.Web.svg?branch=dev)](https://travis-ci.com/vectorman1/SKCraft.Web)
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.0.
 
 ## Development server

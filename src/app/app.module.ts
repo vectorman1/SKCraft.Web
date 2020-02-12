@@ -16,6 +16,7 @@ import { ApplyComponent } from './apply/apply.component';
 import { RulesComponent } from './rules/rules.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { TermsComponent } from './terms/terms.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { TermsComponent } from './terms/terms.component';
     RulesComponent,
     PrivacyComponent,
     TermsComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

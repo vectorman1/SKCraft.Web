@@ -1,0 +1,16 @@
+@import '../../assets/sass/paper-kit/variables';
+
+.application-pending {
+    font-size: x-large;
+    color: $warning-color;
+}
+
+.application-accepted {
+    font-size: x-large;
+    color: $success-color;
+}
+
+.application-denied {
+    font-size: x-large;
+    color: $danger-color;
+}

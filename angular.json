@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "SKCraftWeb"
+  "defaultProject": "SKCraftWeb",
+  "cli": {
+    "analytics": false
+  }
 }

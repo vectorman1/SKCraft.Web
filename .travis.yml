@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "12"
 dist: trusty
-sudo: required
+root: required
 
 branches:
   only:
@@ -15,10 +15,17 @@ script:
   - ng build --prod --base-href https://skcraft.herokuapp.com/
 
 deploy:
-  provider: heroku
+  - provider: heroku
   edge: true
   api_key: $HEROKU_API_KEY
   skip_cleanup: true
   app: skcraft
   on:
     branch: master
+  - provider: heroku
+  edge: true
+  api_key: $HEROKU_API_KEY
+  skip_cleanup: true
+  app: skcraft-dev
+  on:
+    branch: dev

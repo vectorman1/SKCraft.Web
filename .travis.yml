@@ -8,6 +8,7 @@ os: linux
 branches:
   only:
     - master
+    - dev
 
 before_script:
   - npm install

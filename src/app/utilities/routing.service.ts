@@ -9,9 +9,9 @@ export class RoutingService {
     }
 
     public getPath() {
-        var path = this.location.prepareExternalUrl(this.location.path());
+        let path = this.location.prepareExternalUrl(this.location.path());
 
-        if(path.charAt(0) === '#'){
+        if (path.charAt(0) === '#') {
             path = path.slice(1);
         }
 

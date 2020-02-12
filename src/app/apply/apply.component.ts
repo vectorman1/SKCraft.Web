@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./apply.component.scss']
 })
 export class ApplyComponent implements OnInit {
+  focus: any;
+  focus1: any;
 
   constructor() { }
 

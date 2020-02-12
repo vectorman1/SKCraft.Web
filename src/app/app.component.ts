@@ -66,13 +66,12 @@ export class AppComponent implements OnInit {
 	}
 
 	removeFooter() {
-		var titlee = this.location.prepareExternalUrl(this.location.path());
-		titlee = titlee.slice(1);
+		let title = this.location.prepareExternalUrl(this.location.path());
+		title = title.slice(1);
 
-		if (titlee === 'signup' || titlee === 'nucleoicons') {
+		if (title === 'signup' || title === 'nucleoicons') {
 			return false;
-		}
-		else {
+		} else {
 			return true;
 		}
 	}

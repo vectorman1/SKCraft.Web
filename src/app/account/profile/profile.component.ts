@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 
 export class ProfileComponent implements OnInit {
 	isCollapsed = false;
+
 	constructor() { }
 
 	ngOnInit() { }

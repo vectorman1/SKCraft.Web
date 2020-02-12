@@ -7,6 +7,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from '../core/core.module';
+import { ConfigService } from '../shared/config.service';
 
 
 @NgModule({
@@ -17,7 +22,9 @@ import { ProfileComponent } from './profile/profile.component';
 	],
 	imports: [
 		CommonModule,
+		CoreModule,
 		AccountRoutingModule,
+		FormsModule,
 		NgbModule
 	]
 })

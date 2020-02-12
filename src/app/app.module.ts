@@ -10,16 +10,16 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 
-import { HomeComponent } from './home/home.component';
-import { ApplyComponent } from './apply/apply.component';
-import { RulesComponent } from './rules/rules.component';
+import { HomeComponent } from './components/home/home.component';
+import { ApplyComponent } from './components/apply/apply.component';
+import { RulesComponent } from './components/rules/rules.component';
 
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { ProfileComponent } from './profile/profile.component';
+import { LoginComponent } from './account/components/login/login.component';
+import { SignupComponent } from './account/components/signup/signup.component';
+import { ProfileComponent } from './account/components/profile/profile.component';
 
-import { PrivacyComponent } from './privacy/privacy.component';
-import { TermsComponent } from './terms/terms.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
+import { TermsComponent } from './components/terms/terms.component';
 
 import { ComponentsModule } from './components/components.module';
 import { ExamplesModule } from './examples/examples.module';

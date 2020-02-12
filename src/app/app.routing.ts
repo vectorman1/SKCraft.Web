@@ -4,17 +4,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ComponentsComponent } from './components/components.component';
-import { ProfileComponent } from './profile/profile.component';
-import { SignupComponent } from './signup/signup.component';
+import { ProfileComponent } from './account/components/profile/profile.component';
+import { SignupComponent } from './account/components/signup/signup.component';
 import { LandingComponent } from './examples/landing/landing.component';
 import { NucleoiconsComponent } from './components/nucleoicons/nucleoicons.component';
-import { HomeComponent } from './home/home.component';
-import { ApplyComponent } from './apply/apply.component';
-import { TermsComponent } from './terms/terms.component';
-import { PrivacyComponent } from './privacy/privacy.component';
-import { RulesComponent } from './rules/rules.component';
-import { NewsComponent } from './news/news.component';
-import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './components/home/home.component';
+import { ApplyComponent } from './components//apply/apply.component';
+import { TermsComponent } from './components//terms/terms.component';
+import { PrivacyComponent } from './components//privacy/privacy.component';
+import { RulesComponent } from './components//rules/rules.component';
+import { NewsComponent } from './components//news/news.component';
+import { LoginComponent } from './account/components/login/login.component';
 
 const routes: Routes = [
 	{ path: '', redirectTo: 'home', pathMatch: 'full' },

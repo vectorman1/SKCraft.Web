@@ -1,12 +1,15 @@
-<nav class="navbar navbar-expand-lg fixed-top bg-danger" color-on-scroll="200" [ngClass]="{'navbar-transparent': isHome()}">
+<nav class="navbar navbar-expand-lg fixed-top bg-danger" color-on-scroll="200"
+    [ngClass]="{'navbar-transparent': isHome()}">
     <div class="container">
         <div class="navbar-translate">
             <a class="navbar-brand" [routerLink]="['/home']">
                 <span [hidden]="!isHome()">SKCraft</span>
                 <img src="assets/img/skcraft/skcraft_icon.png" height="25px" [hidden]="isHome()">
             </a>
-            
-            <button class="navbar-toggler navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation" (click)="sidebarToggle()">
+
+            <button class="navbar-toggler navbar-burger" type="button" data-toggle="collapse"
+                data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                aria-label="Toggle navigation" (click)="sidebarToggle()">
                 <span class="navbar-toggler-bar"></span>
                 <span class="navbar-toggler-bar"></span>
                 <span class="navbar-toggler-bar"></span>
@@ -15,17 +18,21 @@
         <div class="navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a [routerLink]="['/news']" routerLinkActive="active" class="nav-link"><i class="nc-icon nc-paper"></i>News</a>
+                    <a [routerLink]="['/home/news']" routerLinkActive="active" class="nav-link"><i
+                            class="nc-icon nc-paper"></i>News</a>
                 </li>
                 <li class="nav-item">
-                    <a [routerLink]="['/rules']" routerLinkActive="active" class="nav-link" ><i class="nc-icon nc-book-bookmark"></i> Read our rules</a>
+                    <a [routerLink]="['/home/rules']" routerLinkActive="active" class="nav-link"><i
+                            class="nc-icon nc-book-bookmark"></i> Read our rules</a>
                 </li>
                 <li class="nav-item">
-                    <a [routerLink]="['/home']" *ngIf="!isDocumentation()" class="nav-link"><i class="nc-icon nc-layout-11"></i>Components</a>
+                    <a [routerLink]="['/home']" *ngIf="!isDocumentation()" class="nav-link"><i
+                            class="nc-icon nc-layout-11"></i>Components</a>
                     <a [routerLink]="['/home']" *ngIf="isDocumentation()" class="nav-link">Back to Kit</a>
-                </li> 
+                </li>
                 <li class="nav-item">
-                    <a [routerLink]="['/apply']" routerLinkActive="active" class="btn btn-success btn-round">Apply now</a>
+                    <a [routerLink]="['/home/apply']" routerLinkActive="active" class="btn btn-success btn-round">Apply
+                        now</a>
                 </li>
             </ul>
         </div>

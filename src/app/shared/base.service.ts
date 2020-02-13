@@ -4,7 +4,7 @@ export abstract class BaseService {
 
     constructor() { }
 
-    protected handleError(error: any) {
+    protected handleIdentityError(error: any) {
 
         var applicationError = error.headers.get('Application-Error');
 

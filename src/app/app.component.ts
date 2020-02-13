@@ -5,11 +5,13 @@ import 'rxjs/add/operator/filter';
 import { Location } from '@angular/common';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { RoutingService } from './shared/utilities/routing.service';
+import { fadeAnimation } from './animations/fade.animation';
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss']
+	styleUrls: ['./app.component.scss'],
+	animations: [fadeAnimation]
 })
 export class AppComponent implements OnInit {
 	private _router: Subscription;

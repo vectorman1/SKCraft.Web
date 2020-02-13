@@ -30,6 +30,7 @@ export class SignupComponent implements OnInit {
 				result => {
 					if (result) {
 						this.success = true;
+
 					}
 				},
 				error => {

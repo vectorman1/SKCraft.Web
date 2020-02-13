@@ -8,10 +8,8 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from '../core/core.module';
-import { ConfigService } from '../shared/config.service';
+import { AuthService } from '../core/authentication/auth.service';
 
 
 @NgModule({
@@ -19,6 +17,9 @@ import { ConfigService } from '../shared/config.service';
 		LoginComponent,
 		SignupComponent,
 		ProfileComponent
+	],
+	providers: [
+		AuthService
 	],
 	imports: [
 		CommonModule,

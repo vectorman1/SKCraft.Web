@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { ConfigService } from '../../shared/config.service';
 import { UserData } from '../models/UserData';
+import { log } from 'util';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class WebService {
@@ -12,25 +14,7 @@ export class WebService {
 
     }
 
-    getMinecraftUuid(): string {
-        let uuid;
-
-        this.http.get<string>(this.configService.apiBaseUrl + 'web/minecraft_uuid')
-            .subscribe(res => {
-                uuid = res;
-            });
-
-        return uuid;
-    }
-
-    getUserData(): UserData {
-        let userData: UserData;
-
-        this.http.get<UserData>(this.configService.apiBaseUrl + `/web/user_data`)
-            .subscribe(res => {
-                userData = res;
-            });
-
-        return userData;
+    getUserData(): Observable<UserData> {
+        return this.http.get<UserData>(this.configService.apiBaseUrl + `web/user_data`);
     }
 }

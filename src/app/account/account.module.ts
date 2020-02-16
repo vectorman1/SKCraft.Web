@@ -10,16 +10,22 @@ import { ProfileComponent } from './profile/profile.component';
 import { FormsModule } from '@angular/forms';
 import { CoreModule } from '../core/core.module';
 import { AuthService } from '../core/authentication/auth.service';
+import { AuthGuard } from '../core/authentication/auth.guard';
+import { SignoutComponent } from './signout/signout.component';
+import { WebService } from './services/web.service';
 
 
 @NgModule({
 	declarations: [
 		LoginComponent,
 		SignupComponent,
-		ProfileComponent
+		ProfileComponent,
+		SignoutComponent
 	],
 	providers: [
-		AuthService
+		AuthService,
+		WebService,
+		AuthGuard
 	],
 	imports: [
 		CommonModule,

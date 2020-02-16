@@ -13,6 +13,10 @@ import { AuthService } from '../core/authentication/auth.service';
 import { AuthGuard } from '../core/authentication/auth.guard';
 import { SignoutComponent } from './signout/signout.component';
 import { WebService } from './services/web.service';
+import { ApplicationService } from './services/application.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpConfigInterceptor } from '../interceptor/httpconfig.interceptor';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -25,14 +29,21 @@ import { WebService } from './services/web.service';
 	providers: [
 		AuthService,
 		WebService,
-		AuthGuard
+		ApplicationService,
+		AuthGuard,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: HttpConfigInterceptor,
+			multi: true
+		}
 	],
 	imports: [
 		CommonModule,
 		CoreModule,
 		AccountRoutingModule,
 		FormsModule,
-		NgbModule
+		NgbModule,
+		MatProgressSpinnerModule
 	]
 })
 export class AccountModule { }

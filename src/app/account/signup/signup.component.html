@@ -8,9 +8,9 @@
 						<h3 class="title">Register</h3>
 						<form *ngIf="!success" #f="ngForm" (ngSubmit)="onSubmit()">
 							<div class="form-group">
-								<label for="name" class="sr-only">Display Name</label>
-								<input type="text" id="name" name="name" [(ngModel)]="userRegistration.displayName"
-									class="form-control" placeholder="Your name" required autoFocus>
+								<label for="name" class="sr-only form-control">Username</label>
+								<input type="text" id="name" name="name" [(ngModel)]="userRegistration.userName"
+									class="form-control" placeholder="Your Minecraft username" required autoFocus>
 							</div>
 							<div class="form-group">
 								<label for="email" class="sr-only">Email address</label>

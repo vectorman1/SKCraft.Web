@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 import { BaseService } from "../../shared/base.service";
 import { ConfigService } from '../../shared/config.service';
 import { log } from 'util';
 import { AuthenticationResult } from './AuthenticationResult';
-import { JwtUser } from './User';
+import { JwtUser } from './JwtUser';
 
 import * as jwt_decode from 'jwt-decode';
 
@@ -19,6 +19,8 @@ export class AuthService extends BaseService {
     private _authNavStatusSource = new BehaviorSubject<boolean>(false);
     // Observable navItem stream
     authNavStatus$ = this._authNavStatusSource.asObservable();
+
+    authenticationChange: Subject<boolean> = new Subject<boolean>();
 
     constructor(private http: HttpClient, private configService: ConfigService) {
         super();
@@ -32,12 +34,21 @@ export class AuthService extends BaseService {
         }
 
         let decodedToken = jwt_decode(token);
+        let user =
+            new JwtUser(
+                decodedToken.nameid,
+                decodedToken.role);
+        return user;
     }
 
-    isAuthenticated(): boolean {
+    getToken(): string {
+        return localStorage.getItem('id_token');
+    }
+
+    isAuthenticated() {
         let user = this.getUser();
 
-        if (user == null) {
+        if (!user) {
             return false;
         }
 
@@ -49,6 +60,10 @@ export class AuthService extends BaseService {
             .post<AuthenticationResult>(this.configService.apiBaseUrl + 'authentication/login', userLogin)
             .pipe(
                 catchError(this.handleIdentityError));
+    }
+
+    logout() {
+        localStorage.removeItem('id_token');
     }
 
     register(userRegistration: any) {

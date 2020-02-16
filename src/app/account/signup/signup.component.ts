@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserRegistration } from './UserRegistration';
 import { AuthService } from 'src/app/core/authentication/auth.service';
 import { finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-signup',
@@ -11,11 +12,11 @@ import { finalize } from 'rxjs/operators';
 export class SignupComponent implements OnInit {
 	success: boolean;
 	error: string;
-	userRegistration: UserRegistration = { displayName: '', email: '', password: '' };
+	userRegistration: UserRegistration = { userName: '', email: '', password: '' };
 	submitted: boolean = false;
 
 
-	constructor(private authService: AuthService) { }
+	constructor(private authService: AuthService, private router: Router) { }
 
 	ngOnInit() { }
 
@@ -30,7 +31,7 @@ export class SignupComponent implements OnInit {
 				result => {
 					if (result) {
 						this.success = true;
-
+						this.router.navigate(['/account/login/']);
 					}
 				},
 				error => {

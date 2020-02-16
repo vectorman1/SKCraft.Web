@@ -7,12 +7,12 @@
         <div class="container">
             <div class="owner">
                 <div class="avatar">
-                    <img *ngIf="minecraftUuid" src="https://crafatar.com/renders/head/{{minecraftUuid}}"
+                    <img *ngIf="userData" src="https://crafatar.com/renders/head/{{userData.minecraftUuid}}"
                         alt="Circle Image" class="img-circle img-no-padding img-responsive">
                 </div>
                 <div class="name">
-                    <h4 class="title mb-1">{{userData.userName}}</h4>
-                    <h6 class="description">{{user.role}}</h6>
+                    <h4 *ngIf="userData" class="title mb-1">{{userData.username}}</h4>
+                    <h6 *ngIf="userData" class="description">{{user.role}}</h6>
                 </div>
             </div>
             <br />
@@ -21,38 +21,49 @@
                     <ngb-tabset [justify]="'center'">
                         <ngb-tab title="Applications">
                             <ng-template ngbTabContent>
-                                <div class="row following" id="accounts">
+                                <mat-progress-spinner *ngIf="!applications"></mat-progress-spinner>
+                                <div *ngIf="applications.length === 0" class="row">
+                                    <span class="mr-auto ml-auto">No applications found. Submit one here or if you have
+                                        submitted
+                                        one, link your Minecraft account here.</span>
+                                </div>
+                                <div class="row following">
                                     <div class="col-md-6 ml-auto mr-auto">
-                                        <ul class="list-unstyled follows">
-                                            <li>
-                                                <div class="row" (click)="isCollapsed = !isCollapsed"
-                                                    [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-                                                    <div class="col-md-2 col-sm-2 ml-auto mr-auto">
-                                                        <img *ngIf="minecraftUuid"
-                                                            src="https://crafatar.com/renders/head/{{minecraftUuid}}"
+                                        <ul class="list-unstyled">
+                                            <li *ngFor="let application of applications" class="mb-5 card card-no-anim">
+                                                <div class="row">
+                                                    <div class="col-md-1 ml-auto mr-auto">
+                                                        <img src="https://crafatar.com/renders/head/{{userData.minecraftUuid}}"
                                                             alt="Circle Image"
                                                             class="img-circle img-no-padding img-responsive">
                                                     </div>
-                                                    <div class="col-md-7 col-sm-4 ml-auto">
-                                                        <h6>Flume<br /><small>Musical Producer</small></h6>
+                                                    <div class="col-md-10 ml-auto mr-auto">
+                                                        <h6>{{userData.username}}<br />
+                                                            <small>Created At: {{application.createdAt | date}}</small>
+                                                            <br />
+                                                            <small>Updated At: {{application.updatedAt | date}}</small>
+                                                        </h6>
                                                     </div>
-                                                    <div class="col-md-3 col-sm-2 ml-auto mr-auto mt-auto mb-auto">
+                                                    <div class="col-md-1 ml-auto mr-auto">
                                                         <div class="form-check">
-                                                            <i class="fas fa-spinner fa-spin application-pending"
+                                                            <i *ngIf="application.state === 'pending'"
+                                                                class="fas fa-spinner fa-spin application-pending"
                                                                 ngbTooltip="Your application is under review."
-                                                                placement="bottom"></i>
-                                                            <i class="fas fa-check-circle application-accepted"
+                                                                placement="right" container="body"></i>
+                                                            <i *ngIf="application.state === 'accepted'"
+                                                                class="fas fa-check-circle application-accepted"
                                                                 ngbTooltip="Your application has been accepted!"
-                                                                placement="bottom"></i>
-                                                            <i class="fas fa-times-circle application-denied"
-                                                                ngbTooltip="Your application has been denied!"
-                                                                placement="bottom"></i>
+                                                                placement="right" container="body"></i>
+                                                            <i *ngIf="application.state === 'rejected'"
+                                                                class="fas fa-times-circle application-rejected"
+                                                                ngbTooltip="Your application has been rejected!"
+                                                                placement="right" container="body"></i>
                                                         </div>
                                                     </div>
-                                                    <div id="collapseExample" [ngbCollapse]="isCollapsed">
-                                                        <div class="card">
+                                                    <div class="w-100">
+                                                        <div class="card card-no-anim card-bio">
                                                             <div class="card-body">
-                                                                You can collapse this card by clicking Toggle
+                                                                {{application.bio}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -67,24 +78,26 @@
                             <ng-template ngbTabContent>
                                 <div class="row following" id="accounts">
                                     <div class="col-md-6 ml-auto mr-auto">
+                                        <div *ngIf="!userData.minecraftUuid">
+                                            No Minecraft account linked. Link one here.
+                                        </div>
                                         <ul class="list-unstyled follows">
                                             <li>
                                                 <div class="row">
                                                     <div class="col-md-2 col-sm-2 ml-auto mr-auto">
-                                                        <img src="./assets/img/faces/clem-onojeghuo-2.jpg"
+                                                        <img src="https://crafatar.com/renders/head/{{userData.minecraftUuid}}"
                                                             alt="Circle Image"
                                                             class="img-circle img-no-padding img-responsive">
                                                     </div>
-                                                    <div class="col-md-7 col-sm-4 ml-auto">
-                                                        <h6>Flume<br /><small>Musical Producer</small></h6>
+                                                    <div class="col-md-7 col-sm-4">
+                                                        <h6>{{userData.username}}<br /><small>{{userData.minecraftUuid}}</small>
+                                                        </h6>
                                                     </div>
-                                                    <div class="col-md-3 col-sm-2 ml-auto mr-auto">
-                                                        <div class="form-check">
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" value=""
-                                                                    checked="">
-                                                                <span class="form-check-sign"></span>
-                                                            </label>
+                                                    <div class="col-md-3 col-sm-2">
+                                                        <div class="form-check mt-auto mb-auto">
+                                                            <i class="fas fa-check-circle application-accepted"
+                                                                ngbTooltip="No ongoing bans." placement="right"
+                                                                container="body"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -98,29 +111,19 @@
                             <ng-template ngbTabContent>
                                 <div class="row following" id="accounts">
                                     <div class="col-md-6 ml-auto mr-auto">
-                                        <ul class="list-unstyled follows">
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-md-2 col-sm-2 ml-auto mr-auto">
-                                                        <img src="./assets/img/faces/clem-onojeghuo-2.jpg"
-                                                            alt="Circle Image"
-                                                            class="img-circle img-no-padding img-responsive">
-                                                    </div>
-                                                    <div class="col-md-7 col-sm-4 ml-auto">
-                                                        <h6>Flume<br /><small>Musical Producer</small></h6>
-                                                    </div>
-                                                    <div class="col-md-3 col-sm-2 ml-auto mr-auto">
-                                                        <div class="form-check">
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" value=""
-                                                                    checked="">
-                                                                <span class="form-check-sign"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group align-middle">
+                                                    <label for="minecraftUsername">Minecraft
+                                                        Username:</label>
                                                 </div>
-                                            </li>
-                                        </ul>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control mt-auto mb-auto"
+                                                    name="minecraftfUsername" id="" aria-describedby="helpId"
+                                                    placeholder="">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </ng-template>

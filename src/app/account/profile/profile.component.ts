@@ -4,6 +4,9 @@ import { JwtUser } from 'src/app/core/authentication/JwtUser';
 import { log } from 'util';
 import { UserData } from '../models/UserData';
 import { WebService } from '../services/web.service';
+import { ApplicationService } from '../services/application.service';
+import { Application } from '../models/Application';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -13,15 +16,24 @@ import { WebService } from '../services/web.service';
 })
 export class ProfileComponent implements OnInit {
 	isCollapsed = false;
-	user: JwtUser;
+	user: JwtUser = this.authService.getUser();
 	userData: UserData;
-	minecraftUuid: string = this.webSerivce.getMinecraftUuid();
+	applications: Application[];
 
-	constructor(private authService: AuthService, private webSerivce: WebService) { }
+	constructor(private authService: AuthService, private webSerivce: WebService, private applicationSerivce: ApplicationService) { }
 
 	ngOnInit() {
-		this.user = this.authService.getUser();
-		this.userData = this.webSerivce.getUserData();
-	}
+		this.webSerivce.getUserData().subscribe(res => {
+			this.userData = res;
+		});
 
+		this.applicationSerivce.getForCurrentUser()
+			.pipe(
+				map(applications => applications.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
+			)
+			.subscribe(res => {
+				this.applications = res;
+				log(JSON.stringify(this.applications));
+			});
+	}
 }

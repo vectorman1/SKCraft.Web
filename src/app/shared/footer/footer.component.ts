@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/authentication/auth.service';
+import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'app-footer',
@@ -8,7 +10,14 @@ import { Component, OnInit } from '@angular/core';
 export class FooterComponent implements OnInit {
 	test: Date = new Date();
 
-	constructor() { }
+	constructor(private authService: AuthService) {
+	}
 
-	ngOnInit() { }
+	ngOnInit() {
+	}
+
+	public get isAuthenticated(): boolean {
+		return this.authService.isAuthenticated();
+	}
+
 }

@@ -41,6 +41,10 @@ export class AuthService extends BaseService {
         return user;
     }
 
+    getToken(): string {
+        return localStorage.getItem('id_token');
+    }
+
     isAuthenticated() {
         let user = this.getUser();
 

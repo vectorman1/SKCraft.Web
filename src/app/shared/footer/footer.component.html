@@ -1,20 +1,23 @@
-<footer class="footer fixed">
+<footer class="footer fixed bg-dark text-light" [ngClass]="{'fixed-bottom': !isHome && !isProfile}">
     <div class="container">
         <div class="row">
             <nav class="footer-nav">
                 <ul>
-                    <li *ngIf="isAuthenticated"><a class="btn btn-link" [routerLink]="['/account/profile']"
+                    <li *ngIf="isAuthenticated"><a class="btn btn-link nav-link" [routerLink]="['/account/profile']"
                             routerLinkActive="btn-danger">Profile</a></li>
-                    <li *ngIf="isAuthenticated"><a class="btn btn-link" [routerLink]="['/account/signout']"
+                    <li *ngIf="isAuthenticated"><a class="btn btn-link nav-link" [routerLink]="['/account/signout']"
                             routerLinkActive="btn-danger">Sign Out</a></li>
-                    <li *ngIf="!isAuthenticated"><a class="btn btn-link" [routerLink]="['/account/login']">Log In</a>
+                    <li *ngIf="!isAuthenticated"><a class="btn btn-link nav-link" [routerLink]="['/account/login']">Log
+                            In</a>
                     </li>
                     <li *ngIf="!isAuthenticated"><a class="btn btn-link" [routerLink]="['/account/signup']"
                             routerLinkActive="btn-danger">Sign
                             Up</a></li>
-                    <li><a class="btn btn-link" [routerLink]="['/home/terms']" routerLinkActive="btn-danger">Terms of
+                    <li><a class="btn btn-link nav-link" [routerLink]="['/home/terms']"
+                            routerLinkActive="btn-danger">Terms of
                             Service</a></li>
-                    <li><a class="btn btn-link" [routerLink]="[ '/home/privacy']" routerLinkActive="btn-danger">Privacy
+                    <li><a class="btn btn-link nav-link" [routerLink]="[ '/home/privacy']"
+                            routerLinkActive="btn-danger">Privacy
                             Policy</a></li>
                 </ul>
             </nav>

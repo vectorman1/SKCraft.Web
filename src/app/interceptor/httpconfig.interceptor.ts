@@ -11,10 +11,16 @@ import {
 
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { AuthService } from '../core/authentication/auth.service';
 
+@Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
+    constructor(private authService: AuthService) {
+
+    }
+
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const token: string = localStorage.getItem('id_token');
+        const token: string = this.authService.getToken();
 
         if (token) {
             req = req.clone({ headers: req.headers.set('Authorization', `Bearer ${token}`) });
@@ -24,11 +30,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
         }
 
-        return next.handle(req).pipe(
-            map((event: HttpEvent<any>) => {
-                return event;
-            })
-        );
+        return next.handle(req);
     }
 
 }

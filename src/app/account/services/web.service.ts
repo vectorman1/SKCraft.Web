@@ -4,6 +4,7 @@ import { ConfigService } from '../../shared/config.service';
 import { UserData } from '../models/UserData';
 import { log } from 'util';
 import { Observable } from 'rxjs';
+import { Settings } from '../models/Settings';
 
 @Injectable()
 export class WebService {
@@ -16,5 +17,9 @@ export class WebService {
 
     getUserData(): Observable<UserData> {
         return this.http.get<UserData>(this.configService.apiBaseUrl + `web/user_data`);
+    }
+
+    updateSettings(settings: Settings) {
+        return this.http.post(this.configService.apiBaseUrl + `web/settings`, settings);
     }
 }

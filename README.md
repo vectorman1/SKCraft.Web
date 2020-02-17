@@ -1,5 +1,5 @@
 # SKCraftWeb 
-Master CI:&nbsp;&nbsp;[![Build Status](https://travis-ci.org/vectorman1/SKCraft.Web.svg?branch=master)](https://travis-ci.org/vectorman1/SKCraft.Web)
+Master CI:&nbsp;&nbsp;[![Build Status](https://travis-ci.com/vectorman1/SKCraft.Web.svg?branch=master)](https://travis-ci.com/vectorman1/SKCraft.Web)
 
 Dev CI:&nbsp;&nbsp;[![Build Status](https://travis-ci.com/vectorman1/SKCraft.Web.svg?branch=dev)](https://travis-ci.com/vectorman1/SKCraft.Web)
 

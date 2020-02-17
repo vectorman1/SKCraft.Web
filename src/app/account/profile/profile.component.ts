@@ -7,7 +7,7 @@ import { WebService } from '../services/web.service';
 import { ApplicationService } from '../services/application.service';
 import { Application } from '../models/Application';
 import { map } from 'rxjs/operators';
-
+import { Settings } from '../models/Settings';
 
 @Component({
 	selector: 'app-profile',
@@ -19,12 +19,23 @@ export class ProfileComponent implements OnInit {
 	user: JwtUser = this.authService.getUser();
 	userData: UserData;
 	applications: Application[];
+	settingsError: string;
+	settingsSuccess: boolean;
+	settingsSubmitted: boolean = false;
+	settings: Settings;
 
 	constructor(private authService: AuthService, private webSerivce: WebService, private applicationSerivce: ApplicationService) { }
 
-	ngOnInit() {
+	initializeUserContents() {
 		this.webSerivce.getUserData().subscribe(res => {
 			this.userData = res;
+			log(JSON.stringify(res))
+			this.settings = {
+				minecraftName: this.userData.minecraftName ? this.userData.minecraftName : '',
+				email: this.userData.email,
+				currentPassword: '',
+				newPassword: ''
+			};
 		});
 
 		this.applicationSerivce.getForCurrentUser()
@@ -34,6 +45,24 @@ export class ProfileComponent implements OnInit {
 			.subscribe(res => {
 				this.applications = res;
 				log(JSON.stringify(this.applications));
+			});
+	}
+
+	ngOnInit() {
+		this.initializeUserContents();
+	}
+
+	onSettingsSubmit() {
+		log(JSON.stringify(this.settings))
+		this.webSerivce.updateSettings(this.settings).subscribe(
+			result => {
+				if (result) {
+					this.settingsSuccess = true;
+					this.initializeUserContents();
+				}
+			},
+			error => {
+				this.settingsError = error;
 			});
 	}
 }

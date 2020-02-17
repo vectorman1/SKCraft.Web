@@ -7,8 +7,9 @@
         <div class="container">
             <div class="owner">
                 <div class="avatar">
-                    <img *ngIf="userData" src="https://crafatar.com/renders/head/{{userData.minecraftUuid}}"
-                        alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                    <img *ngIf="userData.minecraftUuid"
+                        src="https://crafatar.com/renders/head/{{userData.minecraftUuid}}" alt="Circle Image"
+                        class="img-circle img-no-padding img-responsive">
                 </div>
                 <div class="name">
                     <h4 *ngIf="userData" class="title mb-1">{{userData.username}}</h4>
@@ -22,7 +23,7 @@
                         <ngb-tab title="Applications">
                             <ng-template ngbTabContent>
                                 <mat-progress-spinner *ngIf="!applications"></mat-progress-spinner>
-                                <div *ngIf="applications.length === 0" class="row">
+                                <div *ngIf="!applications || applications.length === 0" class="row">
                                     <span class="mr-auto ml-auto">No applications found. Submit one here or if you have
                                         submitted
                                         one, link your Minecraft account here.</span>
@@ -31,7 +32,7 @@
                                     <div class="col-md-6 ml-auto mr-auto">
                                         <ul class="list-unstyled">
                                             <li *ngFor="let application of applications" class="mb-5 card card-no-anim">
-                                                <div class="row">
+                                                <div class="card-body row">
                                                     <div class="col-md-1 ml-auto mr-auto">
                                                         <img src="https://crafatar.com/renders/head/{{userData.minecraftUuid}}"
                                                             alt="Circle Image"
@@ -45,7 +46,7 @@
                                                         </h6>
                                                     </div>
                                                     <div class="col-md-1 ml-auto mr-auto">
-                                                        <div class="form-check">
+                                                        <div class="form-check mb-auto mt-auto">
                                                             <i *ngIf="application.state === 'pending'"
                                                                 class="fas fa-spinner fa-spin application-pending"
                                                                 ngbTooltip="Your application is under review."
@@ -61,8 +62,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="w-100">
-                                                        <div class="card card-no-anim card-bio">
-                                                            <div class="card-body">
+                                                        <div class="">
+                                                            <div class="card-footer">
                                                                 {{application.bio}}
                                                             </div>
                                                         </div>
@@ -81,7 +82,7 @@
                                         <div *ngIf="!userData.minecraftUuid">
                                             No Minecraft account linked. Link one here.
                                         </div>
-                                        <ul class="list-unstyled follows">
+                                        <ul *ngIf="userData.minecraftUuid" class="list-unstyled follows">
                                             <li>
                                                 <div class="row">
                                                     <div class="col-md-2 col-sm-2 ml-auto mr-auto">
@@ -90,7 +91,7 @@
                                                             class="img-circle img-no-padding img-responsive">
                                                     </div>
                                                     <div class="col-md-7 col-sm-4">
-                                                        <h6>{{userData.username}}<br /><small>{{userData.minecraftUuid}}</small>
+                                                        <h6>{{userData.minecraftName}}<br /><small>{{userData.minecraftUuid}}</small>
                                                         </h6>
                                                     </div>
                                                     <div class="col-md-3 col-sm-2">
@@ -110,20 +111,81 @@
                         <ngb-tab title="Settings">
                             <ng-template ngbTabContent>
                                 <div class="row following" id="accounts">
-                                    <div class="col-md-6 ml-auto mr-auto">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group align-middle">
-                                                    <label for="minecraftUsername">Minecraft
-                                                        Username:</label>
+                                    <div class="col-md-6 ml-auto mr-auto text-right">
+                                        <form #f="ngForm" (ngSubmit)="onSettingsSubmit()">
+                                            <div class="row">
+                                                <div *ngIf="settingsError" class="alert alert-danger w-100 text-left"
+                                                    role="alert">
+                                                    <strong>Oops!</strong> {{settingsError}}
                                                 </div>
                                             </div>
-                                            <div class="col-md-8">
-                                                <input type="text" class="form-control mt-auto mb-auto"
-                                                    name="minecraftfUsername" id="" aria-describedby="helpId"
-                                                    placeholder="">
+                                            <div class="form-group row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group align-middle">
+                                                        <label for="minecraftName" class="mt-2">
+                                                            Minecraft Username:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control mt-auto mb-auto"
+                                                        name="minecraftfUsername" [(ngModel)]="settings.minecraftName">
+                                                </div>
                                             </div>
-                                        </div>
+                                            <div class="form-group row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group align-middle">
+                                                        <label class="mt-2">E-Mail:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control mt-auto mb-auto" name="email"
+                                                        #email="ngModel" id="email" [(ngModel)]="settings.email" email>
+                                                    <small
+                                                        [hidden]="email.valid || (email.pristine && !settingsSubmitted)"
+                                                        class="text-danger">Please enter a valid
+                                                        email</small>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group align-right">
+                                                        <label for="currentPassowrd" class="mt-2">Current
+                                                            Password:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="password" class="form-control mt-auto mb-auto"
+                                                        name="currentPassowrd" [(ngModel)]="settings.currentPassword"
+                                                        required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group align-middle">
+                                                        <label for="minecraftUsername" class="mt-2">
+                                                            New Password:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="password" class="form-control mt-auto mb-auto"
+                                                        name="minecraftfUsername" id=""
+                                                        [(ngModel)]="settings.newPassword">
+                                                    <small id="passwordHelp" class="form-text text-muted">Min. 6
+                                                        characters with at least
+                                                        one non alphanumeric
+                                                        character</small>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-lg btn-primary btn-block register-btn" type="submit"
+                                                [disabled]="!f.form.valid">
+                                                <span [hidden]="settingsSubmitted">Update Data</span>
+                                                <div [hidden]="!settingsSubmitted" class="spinner-grow text-primary"
+                                                    role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                            </button>
+                                        </form>
+
                                     </div>
                                 </div>
                             </ng-template>

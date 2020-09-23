@@ -27,7 +27,7 @@
     "bootstrap": "^4.4.1",
     "compass-mixins": "^0.12.10",
     "express": "^4.17.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jw-bootstrap-switch-ng2": "^2.0.5",
     "jwt-decode": "^2.2.0",
     "ng2-nouislider": "^1.8.2",
